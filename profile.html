@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 左侧导航栏 -->
+      <div class="sidebar">
+        <div class="logo">
+          <img src="img/logo.png" alt="Logo" class="logo-image" />
+          <span>Daily Reading</span>
+        </div>
+        <ul class="nav-links">
+          <li data-page="home">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </li>
+          <li data-page="user-profile" class="active">
+            <i class="fas fa-user"></i>
+            <span>User Profile</span>
+          </li>
+          <li data-page="my-book">
+            <i class="fas fa-book"></i>
+            <span>My Book</span>
+          </li>
+          <li data-page="goal-setting">
+            <i class="fas fa-bullseye"></i>
+            <span>Goal Setting</span>
+          </li>
+          <li data-page="reading-history">
+            <i class="fas fa-history"></i>
+            <span>Reading History</span>
+          </li>
+          <li data-page="settings">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </li>
+          <img src="img/bar.png" alt="Sidebar Image" class="sidebar-image" />
+          <li data-page="log-out" id="logoutItem">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Log out</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 右侧内容区 -->
+      <div class="content">
+        <div class="header">
+          <h2 id="pageTitle">Edit Profile</h2>
+          <div class="header-icons">
+            <div class="notification">
+              <i class="fas fa-bell"></i>
+              <span id="greetingUser">Hi, User</span>
+            </div>
+            <div class="user-avatar">
+              <img
+                src="https://via.placeholder.com/40"
+                alt="User Avatar"
+                id="headerAvatar"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 用户资料页面 -->
+        <div class="profile-page" id="profilePage">
+          <div class="profile-content">
+            <div class="avatar-upload">
+              <div class="avatar-placeholder" id="avatarPlaceholder">
+                <div class="placeholder-content">
+                  <i class="fas fa-camera"></i>
+                </div>
+              </div>
+              <img
+                src=""
+                alt="Profile Avatar"
+                id="profileAvatar"
+                class="rounded-avatar"
+                style="display: none"
+              />
+              <input
+                type="file"
+                id="avatarUpload"
+                accept="image/*"
+                style="display: none"
+              />
+            </div>
+
+            <div class="profile-info">
+              <h3>User Profile</h3>
+              <div class="info-item">
+                <p>Email: user@example.com</p>
+              </div>
+              <div class="info-item">
+                <p id="usernameDisplay">User Name: username</p>
+                <button class="edit-btn" onclick="showChangeUsernamePage()">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+              <div class="info-item">
+                <p>Password</p>
+                <button class="edit-btn" onclick="showChangePasswordPage()">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+<!-- Goal Setting Page (new content) -->
+
+<!-- 目标设置页面 -->
+<div class="goal-setting-page" id="goalSettingPage" style="display: none">
+  <div class="goal-management">
+    <div class="goal-board" id="goalBoard">
+      <h3>My Goals</h3>
+      <div class="goal-grid" id="goalGrid">
+        <!-- 目标卡片将通过JavaScript动态添加 -->
+      </div>
+      
+    <h3>Create New Goal</h3>
+
+    <div class="goal-form">
+      <div class="form-group">
+        <label for="goalName">Goal Name</label>
+        <input type="text" id="goalName" placeholder="Enter goal name">
+      </div>
+
+      <div class="form-group">
+        <label>Measurement</label>
+        <div class="measurement-select">
+          <button class="measurement-btn active" data-unit="pages">Pages</button>
+          <button class="measurement-btn" data-unit="minutes">Minutes</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="targetValue">Target Value</label>
+        <input type="number" id="targetValue" placeholder="Enter target value">
+      </div>
+      <div class="date-group">
+        <div class="form-group">
+          <label for="startDate">Start Date</label>
+          <input type="date" id="startDate">
+        </div>
+        <div class="form-group">
+          <label for="endDate">End Date</label>
+          <input type="date" id="endDate">
+        </div>
+      </div>
+      <div class="cover-upload">
+        <div class="upload-preview" id="goalCoverPreview"></div>
+        <input type="file" id="goalCoverUpload" accept="image/*" hidden>
+        <button class="upload-btn" onclick="document.getElementById('goalCoverUpload').click()">
+          <i class="fas fa-upload"></i> Upload Cover
+        </button>
+      </div>
+      <div class="form-buttons">
+        <button class="cancel-btn" onclick="clearGoalForm()">Clear</button>
+        <button class="save-btn" onclick="createNewGoal()">Create Goal</button>
+      </div>
+    </div>
+
+   
+    </div>
+  </div>
+</div>
+
+<!-- 进度更新弹窗 -->
+<div class="progress-modal" id="progressModal" style="display: none">
+  <div class="modal-content">
+    <h4>Update Progress</h4>
+    <input type="number" id="currentProgress" placeholder="Enter current value">
+    <div class="modal-buttons">
+      <button class="cancel-btn" onclick="closeProgressModal()">Cancel</button>
+      <button class="save-btn" onclick="updateProgress()">Update</button>
+    </div>
+  </div>
+</div>
+
+<!-- 更新到这里 -->
+ 
+        <!-- 阅读历史页面 -->
+        <div
+          class="reading-history-page"
+          id="readingHistoryPage"
+          style="display: none"
+        >
+          <div class="search-bar">
+            <div class="search-container">
+              <input
+                type="text"
+                placeholder="Search your books"
+                id="searchInput"
+              />
+              <button id="search-button">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+            <select id="filter-select">
+              <option value="all">All</option>
+              <option value="week">7 Days</option>
+              <option value="month">A month</option>
+              <option value="year">A Year</option>
+            </select>
+            <input type="date" id="start-date" placeholder="Start date" />
+            <span class="date-separator">
+              <i class="fas fa-arrow-right"></i>
+            </span>
+            <input type="date" id="end-date" placeholder="End date" />
+          </div>
+          <div class="history" id="history">
+            <div class="no-history-message" style="display: none;"></div>
+          </div>
+        </div>
+
+        <!-- 修改用户名页面 -->
+<div class="change-username-page" id="changeUsernamePage" style="display: none">
+  <h3>Change User Name</h3>
+  <div class="change-username-form-group">
+    <label for="newUsername">New User Name</label>
+    <input
+      type="text"
+      id="newUsername"
+      name="newUsername"
+      placeholder="Enter new username"
+    />
+  </div>
+  <div class="change-username-form-buttons">
+    <button type="button" class="cancel-btn" onclick="showProfilePage()">
+      Return
+    </button>
+    <button type="button" class="save-btn" onclick="updateUsername()">
+      Update
+    </button>
+  </div>
+</div>
+
+<!-- 修改密码页面 -->
+<div class="change-password-page" id="changePasswordPage" style="display: none">
+  <h3>Change Password</h3>
+  <div class="change-password-form-group">
+    <button
+      type="button"
+      class="save-btn"
+      onclick="sendVerificationCode()"
+    >
+      Send Verification Code
+    </button>
+  </div>
+  <div class="change-password-form-group">
+    <label for="verificationCode">Verification Code</label>
+    <input
+      type="text"
+      id="verificationCode"
+      name="verificationCode"
+      placeholder="Enter verification code"
+    />
+  </div>
+  <div class="change-password-form-group">
+    <label for="newPassword">New Password</label>
+    <input
+      type="password"
+      id="newPassword"
+      name="newPassword"
+      placeholder="Enter new password"
+    />
+  </div>
+  <div class="change-password-form-group">
+    <label for="confirmPassword">Confirm Password</label>
+    <input
+      type="password"
+      id="confirmPassword"
+      name="confirmPassword"
+      placeholder="Confirm new password"
+    />
+  </div>
+  <div class="change-password-form-buttons">
+    <button type="button" class="cancel-btn" onclick="showProfilePage()">
+      Return
+    </button>
+    <button type="button" class="save-btn" onclick="updatePassword()">
+      Update
+    </button>
+  </div>
+</div>
+
+          <!-- My Book 页面 -->
+          <div class="my-book-page" id="myBookPage" style="display: none">
+            <div class="favourite-section">
+              <h3>My favourite ❤️</h3>
+              <div class="book-grid" id="favouriteBooks">
+                <!-- 书籍卡片将通过JavaScript动态添加 -->
+              </div>
+              <div class="add-book-btn" onclick="showReadingLogForm()">
+                <i class="fas fa-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- 阅读记录详情页面 -->
+      <div class="reading-details" id="readingDetails" style="display: none">
+        <div class="reading-details-content">
+          <h3 id="detailTitle"></h3>
+          <p id="detailAuthor"></p>
+          <p id="detailDate"></p>
+          <p id="detailReview"></p>
+          <button onclick="closeReadingDetails()">Close</button>
+        </div>
+      </div>
+  
+      <!-- 创建阅读日志表单 -->
+      <div class="reading-log-form" id="readingLogForm" style="display: none">
+        <div class="form-container">
+          <h3>Create a reading log</h3>
+          <div class="book-cover-upload">
+            <img
+              src=""
+              alt="Book Cover"
+              id="bookCoverPreview"
+              style="display: none"
+            />
+            <div class="upload-placeholder" id="uploadPlaceholder">
+              <i class="fas fa-plus"></i>
+            </div>
+            <input
+              type="file"
+              id="bookCoverUpload"
+              accept="image/*"
+              style="display: none"
+            />
+          </div>
+          <div class="form-group">
+            <label for="bookTitle">Title:</label>
+            <input type="text" id="bookTitle" placeholder="Enter book title" />
+          </div>
+          <div class="form-group">
+            <label for="bookAuthor">Author:</label>
+            <input type="text" id="bookAuthor" placeholder="Enter author name" />
+          </div>
+          <div class="form-group">
+            <label for="readingDate">Reading Date:</label>
+            <input type="date" id="readingDate" />
+          </div>
+          <div class="form-group">
+            <label for="bookReview">Review:</label>
+            <textarea
+              id="bookReview"
+              rows="5"
+              placeholder="Write your review here..."
+            ></textarea>
+          </div>
+          <div class="form-buttons">
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="hideReadingLogForm()"
+            >
+              Cancel
+            </button>
+            <button type="button" class="save-btn" onclick="createReadingLog()">
+              Create
+            </button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+   
+
+
+<script src="script.js"></script>
+  </body>
+</html>
