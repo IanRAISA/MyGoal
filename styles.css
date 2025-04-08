@@ -1,0 +1,978 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* 左侧导航栏样式 */
+.sidebar {
+  width: 300px;
+  background-color: #d8c4e3;
+  padding: 20px 0;
+  border-right: 1px solid #ddd;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 0 20px 20px;
+  border-bottom: 1px solid #c9b5d9;
+  font-size: 26px;
+  font-weight: 700;
+  color: #7e3b8d;
+}
+
+.logo-image {
+  width: 60px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 20px 0;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center; /* 使导航栏文字居中 */
+  vertical-align: middle;
+}
+
+.nav-links li {
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.nav-links li:hover {
+  background-color: #c9b5d9;
+}
+
+.nav-links li.active {
+  background-color: #c9b5d9;
+  color: #a262ad;
+}
+
+.nav-links li i {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+}
+
+/* 设置导航栏图片的样式 */
+.sidebar-image {
+  width: 100%; /* 图片宽度占满整个导航栏 */
+  height: auto; /* 保持图片比例 */
+  object-fit: cover; /* 确保图片填充整个区域 */
+  display: block; /* 去掉图片默认的行内元素特性 */
+  margin-bottom: 60px; /* 添加一些间距 */
+  margin-top: 40px;
+}
+
+/* 右侧内容区样式 */
+.content {
+  flex: 1;
+  padding: 20px 30px;
+  background-color: #f0e6f8; /* 原有的背景颜色 */
+  position: relative; /* 设置为相对定位，以便伪元素定位 */
+  overflow-y: auto;
+  z-index: 1; /* 确保内容在伪元素上方 */
+}
+
+.content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("img/image.png"); /* 添加背景图片 */
+  background-size: 550px; /* 调整图片大小 */
+  background-position: right bottom; /* 定位图片 */
+  background-repeat: no-repeat; /* 防止图片重复 */
+  opacity: 0.5; /* 设置透明度为50% */
+  z-index: -1; /* 确保背景图片在内容下方 */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  position: relative; /* 添加相对定位 */
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  margin-top: 60px;
+  width: 100%; /* 横线宽度 */
+  height: 1px; /* 横线厚度 */
+  background-color: #d8c4e3; /* 横线颜色 */
+}
+
+.header h2 {
+  font-size: 36px; /* 增加标题字号 */
+  color: #a262ad;
+  padding: 15px;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+}
+
+.notification {
+  display: flex;
+  align-items: center;
+}
+
+.notification i {
+  font-size: 28px;
+  color: #a262ad;
+  margin-right: 10px;
+}
+
+.notification span {
+  font-size: 28px;
+  font-weight: 700;
+  color: #a262ad;
+  margin-right: 10px;
+}
+
+.user-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/* 用户资料内容样式 */
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 30px;
+  margin-bottom: 30px;
+}
+
+.avatar-upload {
+  position: relative;
+  margin-bottom: 30px;
+  width: 100px;
+  height: 100px;
+  vertical-align: middle;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 2px solid #a262ad;
+  cursor: pointer;
+}
+
+.avatar-placeholder .placeholder-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar-placeholder .placeholder-content i {
+  color: #a262ad;
+  font-size: 24px;
+}
+
+.rounded-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #a262ad; /* 添加紫色边框 */
+  display: none;
+}
+
+.profile-info {
+  width: 100%;
+  max-width: 600px;
+}
+
+.profile-info h3 {
+  margin-bottom: 20px;
+  color: #a262ad;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0 5px;
+  border-bottom: 1px solid #d8c4e3;
+}
+
+.info-item p {
+  font-size: 23px;
+  font-weight: 600;
+  color: #a262ad;
+  line-height: 1.5;
+}
+
+.edit-btn {
+  background: none;
+  border: none;
+  color: #a262ad;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+}
+/* 修改用户名页面样式 */
+.change-username-page {
+  max-width: 600px;
+  margin-left: 20px; /* 改为向左对齐 */
+  display: block;
+  padding: 20px;
+}
+
+.change-username-page h3 {
+  margin-bottom: 20px;
+  color: #a262ad;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.change-username-form-group {
+  margin-bottom: 25px;
+}
+
+.change-username-form-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: #a262ad;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.change-username-form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #d8c4e3;
+  border-radius: 4px;
+  font-size: 18px;
+  outline: none; /* 移除点击时的默认外边框 */
+  transition: border-color 0.3s; /* 添加过渡效果 */
+}
+
+.change-username-form-group input:focus {
+  border-color: #a262ad;
+}
+
+.change-username-form-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cancel-btn,
+.save-btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 15px;
+}
+
+.cancel-btn {
+  background-color: white;
+  color: #a262ad;
+  border: 1px solid #a262ad;
+}
+
+.save-btn {
+  background-color: #a262ad;
+  color: white;
+}
+
+/* 修改密码页面样式 */
+.change-password-page {
+  max-width: 600px;
+  margin-left: 20px; /* 改为向左对齐 */
+  margin-top: -15px;
+  display: block;
+  padding: 20px;
+}
+
+.change-password-page h3 {
+  margin-bottom: 20px;
+  color: #a262ad;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.change-password-form-group {
+  margin-bottom: 25px;
+}
+
+.change-password-form-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: #a262ad;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.change-password-form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #d8c4e3;
+  border-radius: 4px;
+  font-size: 18px;
+  outline: none; /* 移除点击时的默认外边框 */
+  transition: border-color 0.3s; /* 添加过渡效果 */
+}
+
+.change-password-form-group input:focus {
+  border-color: #a262ad;
+}
+
+.change-password-form-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+  }
+
+  .nav-links li {
+    width: 50%;
+    text-align: center;
+  }
+}
+/* 阅读历史页面样式 */
+/* 搜索框和筛选日期功能样式 */
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: -5px;
+}
+
+.search-bar input[type="text"],
+.search-bar select,
+.search-container button,
+.search-bar input[type="date"] {
+  height: 40px; /* 设置统一的高度 */
+  border-radius: 5px;
+  border: 1px solid #a262ad;
+  padding: 0 10px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #a262ad; /* 紫色 */
+  border-radius: 5px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.search-container input {
+  width: 300px; /* 宽度 */
+  height: 40px; /* 高度 */
+  padding: 0 10px; /* 内边距 */
+  font-size: 16px; /* 字体大小 */
+  border: 1px solid #a262ad; /* 边框样式 */
+  color: #a262ad;
+  border-radius: 0px;
+}
+
+.search-container input[type="text"],
+.search-bar select,
+.search-bar input:focus {
+  border-color: #a262ad; /* 聚焦时的边框颜色 */
+  background-color: #fff; /* 聚焦时的背景颜色 */
+  outline: none; /* 移除聚焦时的默认外边框 */
+}
+
+.search-container button {
+  padding: 8px 12px;
+  background-color: #a262ad; /* 紫色 */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.search-bar select {
+  padding: 10px;
+  border: 1px solid #a262ad; /* 紫色 */
+  color: #a262ad;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.search-bar input[type="date"] {
+  padding: 10px;
+  border: 1px solid #a262ad; /* 紫色 */
+  color: #a262ad;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.date-separator {
+  color: #a262ad; /* 紫色 */
+  margin: 0 10px; /* 调整箭头与日期输入框之间的间距 */
+  font-size: 1.2em; /* 调整图标大小 */
+}
+
+/* 历史记录书籍样式 */
+.no-history-message {
+  display: flex; /* 使用Flexbox布局 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  text-align: center; /* 确保文本居中 */
+  font-size: 28px;
+  font-weight: 500;
+  color: #a262ad;
+  height: 100vh; /* 使容器占满整个视口高度 */
+  width: 100%; /* 使容器宽度占满整个视口宽度 */
+}
+
+.history-item h2 {
+  color: #a262ad; /* 紫色 */
+}
+
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+}
+
+.book img {
+  width: 150px;
+  height: auto;
+}
+
+.book span {
+  color: #a262ad; /* 紫色 */
+}
+
+.no-history-message {
+  text-align: center;
+  font-size: 18px;
+  color: #a262ad; /* 紫色 */
+  margin-top: 20px;
+}
+
+/* My Book部分样式 */
+.my-book-page {
+  display: none;
+  width: 100%;
+  padding: 20px;
+}
+
+.favourite-section {
+  margin-bottom: 30px;
+}
+
+.favourite-section h3 {
+  margin-bottom: 20px;
+  margin-top: -35px;
+  color: #a262ad;
+  font-size: 24px;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  position: relative;
+}
+
+.book-card {
+  background-color: #e4d0f5;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+}
+
+.book-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin-top: 10px;
+}
+
+.book-card .book-info {
+  padding: 10px;
+}
+
+.book-card .book-title {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.book-card .book-author {
+  font-size: 12px;
+  color: #a262ad;
+}
+
+.add-book-btn {
+  width: 150px;
+  height: 200px;
+  background-color: #d8c4e3;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-book-btn i {
+  font-size: 30px;
+  color: #a262ad;
+}
+
+/* 创建阅读日志表单样式 */
+.reading-log-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.reading-log-form .form-container {
+  background-color: #f5f0f8;
+  border-radius: 8px;
+  padding: 30px;
+  width: 80%;
+  max-width: 800px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reading-log-form h3 {
+  margin-bottom: 20px;
+  color: #a262ad;
+  font-size: 24px;
+}
+
+.book-cover-upload {
+  width: 150px;
+  height: 200px;
+  background-color: #ece1f5;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.book-cover-upload img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.upload-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-placeholder i {
+  font-size: 30px;
+  color: #a262ad;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #a262ad;
+  font-size: 16px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d8c4e3;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none; /* 移除点击时的默认外边框 */
+  transition: border-color 0.3s; /* 添加过渡效果 */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #a262ad;
+}
+
+.form-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cancel-btn,
+.save-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.cancel-btn {
+  background-color: white;
+  color: #a262ad;
+  border: 1px solid #a262ad;
+}
+
+.save-btn {
+  background-color: #a262ad;
+  color: white;
+}
+
+@media (max-width: 1200px) {
+  .book-card {
+    flex: 0 0 calc(25% - 20px); /* 每行显示4个 */
+  }
+}
+
+@media (max-width: 992px) {
+  .book-card {
+    flex: 0 0 calc(33.333% - 20px); /* 每行显示3个 */
+  }
+}
+
+@media (max-width: 768px) {
+  .book-card {
+    flex: 0 0 calc(50% - 20px); /* 每行显示2个 */
+  }
+}
+
+@media (max-width: 576px) {
+  .book-card {
+    flex: 0 0 100%; /* 每行显示1个 */
+  }
+}
+
+.reading-details {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.reading-details-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reading-details-content h3 {
+  margin-bottom: 15px;
+  color: #a262ad;
+}
+
+.reading-details-content p {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.reading-details-content button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #a262ad;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+/* 目标更新 */
+/* Goal Setting page styles */
+/* 在现有CSS末尾添加以下样式 */
+/* 目标设置页面样式 */
+.goal-setting-page {
+  padding: 20px;
+}
+
+.goal-management h3 {
+  color: #a262ad;
+  font-size: 28px;
+  margin-bottom: 25px;
+}
+
+.goal-form {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(162, 98, 173, 0.1);
+  margin-bottom: 30px;
+}
+
+.date-group {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.measurement-select {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.measurement-btn {
+  padding: 8px 20px;
+  border: 2px solid #a262ad;
+  border-radius: 20px;
+  background: none;
+  color: #a262ad;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.measurement-btn.active {
+  background: #a262ad;
+  color: white;
+}
+
+.cover-upload {
+  margin: 20px 0;
+}
+
+.upload-preview {
+  width: 200px;
+  height: 150px;
+  border: 2px dashed #d8c4e3;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  background-size: cover;
+  background-position: center;
+}
+
+.upload-btn {
+  background: #a262ad;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.upload-btn:hover {
+  background: #8e4d9b;
+}
+
+.goal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.goal-card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(162, 98, 173, 0.15);
+  position: relative;
+}
+
+.goal-cover {
+  height: 180px;
+  border-radius: 10px;
+  background-size: cover;
+  margin-bottom: 15px;
+}
+
+.progress-ring {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: conic-gradient(#a262ad 0%, #e6d0ef 0%);
+  position: relative;
+  margin: 15px auto;
+}
+
+.progress-percent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  color: #a262ad;
+}
+
+.checkmark {
+  display: none;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  color: #4CAF50;
+  font-size: 24px;
+  background: white;
+  border-radius: 50%;
+}
+
+.delete-goal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #ff5252;
+  cursor: pointer;
+}
+
+.progress-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal-content h4 {
+  margin-bottom: 15px;
+  color: #a262ad;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #d8c4e3;
+  border-radius: 5px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* 确保目标表单输入框样式统一 */
+.goal-form input[type="text"],
+.goal-form input[type="number"],
+.goal-form input[type="date"] {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #d8c4e3;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #7e3b8d;
+}
+
+/* 提高进度环的可见性 */
+.progress-ring {
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.progress-ring:hover {
+  transform: scale(1.1);
+}
+
+/* 调整目标卡片文字样式 */
+.goal-card h4 {
+  color: #7e3b8d;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.goal-card p {
+  color: #a262ad;
+  margin: 8px 0;
+  font-size: 0.9em;
+}
